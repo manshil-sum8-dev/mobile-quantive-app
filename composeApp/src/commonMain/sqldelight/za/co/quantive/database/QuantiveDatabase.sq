@@ -1,0 +1,89 @@
+CREATE TABLE FeatureEntity (
+    id TEXT NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    iconName TEXT NOT NULL,
+    category TEXT NOT NULL,
+    isEnabled INTEGER NOT NULL,
+    priority INTEGER NOT NULL,
+    createdAt INTEGER NOT NULL,
+    updatedAt INTEGER NOT NULL
+);
+
+CREATE TABLE ShowcaseEntity (
+    id TEXT NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    subtitle TEXT NOT NULL,
+    description TEXT NOT NULL,
+    imageUrl TEXT,
+    createdAt INTEGER NOT NULL,
+    updatedAt INTEGER NOT NULL
+);
+
+CREATE TABLE StatsEntity (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    uptime REAL NOT NULL,
+    supportHours INTEGER NOT NULL,
+    userCount REAL NOT NULL,
+    lastUpdated TEXT NOT NULL,
+    createdAt INTEGER NOT NULL
+);
+
+-- Indexes for better performance
+CREATE INDEX idx_feature_category ON FeatureEntity(category);
+CREATE INDEX idx_feature_priority ON FeatureEntity(priority);
+CREATE INDEX idx_feature_enabled ON FeatureEntity(isEnabled);
+CREATE INDEX idx_showcase_created ON ShowcaseEntity(createdAt);
+CREATE INDEX idx_stats_created ON StatsEntity(createdAt);
+
+-- Queries for features
+selectAll:
+SELECT * FROM FeatureEntity WHERE isEnabled = 1 ORDER BY priority ASC;
+
+selectById:
+SELECT * FROM FeatureEntity WHERE id = ?;
+
+selectByCategory:
+SELECT * FROM FeatureEntity WHERE category = ? AND isEnabled = 1 ORDER BY priority ASC;
+
+insertFeature:
+INSERT INTO FeatureEntity (id, title, description, iconName, category, isEnabled, priority, createdAt, updatedAt)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+updateFeature:
+UPDATE FeatureEntity
+SET title = ?, description = ?, iconName = ?, category = ?, isEnabled = ?, priority = ?, updatedAt = ?
+WHERE id = ?;
+
+deleteFeature:
+DELETE FROM FeatureEntity WHERE id = ?;
+
+-- Queries for showcase items
+selectAllShowcase:
+SELECT * FROM ShowcaseEntity ORDER BY createdAt DESC;
+
+selectShowcaseById:
+SELECT * FROM ShowcaseEntity WHERE id = ?;
+
+insertShowcase:
+INSERT INTO ShowcaseEntity (id, title, subtitle, description, imageUrl, createdAt, updatedAt)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+updateShowcase:
+UPDATE ShowcaseEntity
+SET title = ?, subtitle = ?, description = ?, imageUrl = ?, updatedAt = ?
+WHERE id = ?;
+
+deleteShowcase:
+DELETE FROM ShowcaseEntity WHERE id = ?;
+
+-- Queries for stats
+selectLatestStats:
+SELECT * FROM StatsEntity ORDER BY createdAt DESC LIMIT 1;
+
+insertStats:
+INSERT INTO StatsEntity (uptime, supportHours, userCount, lastUpdated, createdAt)
+VALUES (?, ?, ?, ?, ?);
+
+deleteOldStats:
+DELETE FROM StatsEntity WHERE createdAt < ?;
