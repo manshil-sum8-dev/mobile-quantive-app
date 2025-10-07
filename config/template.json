@@ -1,0 +1,7 @@
+{
+  "environment": "template",
+  "supabaseUrl": "${SUPABASE_URL}",
+  "supabaseAnonKey": "${SUPABASE_ANON_KEY}",
+  "supabaseServiceRoleKey": "${SUPABASE_SERVICE_ROLE_KEY}",
+  "supabaseJwtSecret": "${SUPABASE_JWT_SECRET}"
+}

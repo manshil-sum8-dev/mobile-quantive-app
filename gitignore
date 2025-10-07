@@ -119,10 +119,9 @@ google-services.json
 !/.gradle/configuration-cache
 
 # Environment configs (keep templates, ignore actual keys)
-config/staging.json
-config/production.json
+config/*.json
 !config/development.json
-!config/
+!config/template.json
 
 # Compose generated resources
 composeApp/build/generated/

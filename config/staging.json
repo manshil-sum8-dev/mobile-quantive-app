@@ -1,7 +1,0 @@
-{
-  "environment": "staging",
-  "supabaseUrl": "https://your-staging-project.supabase.co",
-  "supabaseAnonKey": "your-staging-anon-key",
-  "supabaseServiceRoleKey": "your-staging-service-role-key",
-  "supabaseJwtSecret": "your-staging-jwt-secret"
-}
