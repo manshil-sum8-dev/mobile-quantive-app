@@ -12,6 +12,8 @@ import za.co.quantive.app.data.repository.FeatureRepositoryImpl
 
 val appModule = module {
 
+    
+  
     // Network Module
     single {
         HttpClient {

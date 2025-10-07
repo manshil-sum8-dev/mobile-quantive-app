@@ -67,6 +67,7 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.kt)
 
+  
           }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -85,6 +86,9 @@ kotlin {
 android {
     namespace = "za.co.quantive.app"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "za.co.quantive.app"
@@ -103,6 +107,16 @@ android {
             isDebuggable = true
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
+            buildConfigField("String", "ENVIRONMENT", "\"development\"")
+        }
+
+        create("staging") {
+            isDebuggable = true
+            isMinifyEnabled = false
+            applicationIdSuffix = ".staging"
+            versionNameSuffix = "-staging"
+            buildConfigField("String", "ENVIRONMENT", "\"staging\"")
+            matchingFallbacks.add("debug")
         }
 
         getByName("release") {
@@ -112,6 +126,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "ENVIRONMENT", "\"production\"")
 
             // Signing configuration - you'll need to create keystore.properties
             signingConfig = signingConfigs.getByName("debug") // Replace with release signing config

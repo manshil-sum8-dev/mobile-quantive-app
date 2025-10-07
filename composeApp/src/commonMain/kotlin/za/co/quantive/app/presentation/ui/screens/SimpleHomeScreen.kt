@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import za.co.quantive.app.Greeting
 import za.co.quantive.app.presentation.ui.theme.*
@@ -147,6 +148,15 @@ fun HeaderSection(
                 text = "Running on $greeting",
                 style = MaterialTheme.typography.bodyLarge.copy(
                     color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
+                ),
+                textAlign = TextAlign.Center
+            )
+
+  
+            Text(
+                text = "Environment Configuration Ready",
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    color = MaterialTheme.colorScheme.primary
                 ),
                 textAlign = TextAlign.Center
             )

@@ -1,0 +1,7 @@
+{
+  "environment": "production",
+  "supabaseUrl": "https://your-production-project.supabase.co",
+  "supabaseAnonKey": "your-production-anon-key",
+  "supabaseServiceRoleKey": "your-production-service-role-key",
+  "supabaseJwtSecret": "your-production-jwt-secret"
+}
